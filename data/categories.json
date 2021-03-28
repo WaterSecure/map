@@ -1,0 +1,19 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "cool",
+      "color": "#ff7700"
+    },
+    {
+      "id": 2,
+      "name": "not cool",
+      "color": "#e336de"
+    },
+    {
+      "id": 3,
+      "name": "new test location",
+      "color": "#cc1919"
+    }
+  ]
+}

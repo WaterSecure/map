@@ -1,0 +1,41 @@
+.spinner {
+    position: absolute;
+    left: calc(50% - 30px);
+    top: calc(50% - 42.5px);
+    height: 85px;
+    width: 60px;
+    margin: 0px auto;
+    -webkit-animation: rotation 2s infinite cubic-bezier(.83,.16,.41,.97);
+    -moz-animation: rotation 2s infinite cubic-bezier(.83,.16,.41,.97);
+    -o-animation: rotation 2s infinite cubic-bezier(.83,.16,.41,.97);
+    animation: rotation 2s infinite cubic-bezier(.83,.16,.41,.97);
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:cc='http://creativecommons.org/ns%23' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' xmlns:sodipodi='http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd' xmlns:inkscape='http://www.inkscape.org/namespaces/inkscape' width='60' height='85.268486' version='1.1' id='svg96' sodipodi:docname='filter.svg' inkscape:version='1.0 (6e3e5246a0, 2020-05-07)'%3E%3Cmetadata id='metadata102'%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage' /%3E%3Cdc:title%3E%3C/dc:title%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cdefs id='defs100' /%3E%3Csodipodi:namedview inkscape:document-rotation='0' pagecolor='%23ffffff' bordercolor='%23666666' borderopacity='1' objecttolerance='10' gridtolerance='10' guidetolerance='10' inkscape:pageopacity='0' inkscape:pageshadow='2' inkscape:window-width='2560' inkscape:window-height='1385' id='namedview98' showgrid='false' fit-margin-top='0' fit-margin-left='0' fit-margin-right='0' fit-margin-bottom='0' lock-margins='false' inkscape:zoom='5.5002535' inkscape:cx='53.169374' inkscape:cy='15.466889' inkscape:window-x='0' inkscape:window-y='26' inkscape:window-maximized='1' inkscape:current-layer='svg96' /%3E%3Cpath d='m 10.639473,19.299473 h 24 v 24 h -24 z' fill='none' id='path92' /%3E%3Cpath style='fill:%230000ff' d='m 30.000001,1.2205549 c -15.910922,0 -28.7794461,12.8685241 -28.7794461,28.7794461 0,21.584581 28.7794461,53.447539 28.7794461,53.447539 0,0 28.779444,-31.862958 28.779444,-53.447539 0,-15.910922 -12.868523,-28.7794461 -28.779444,-28.7794461 z m 0,39.0578181 c -5.673662,0 -10.278374,-4.60471 -10.278374,-10.278372 0,-5.673662 4.604712,-10.278374 10.278374,-10.278374 5.673662,0 10.278372,4.604712 10.278372,10.278374 0,5.673662 -4.60471,10.278372 -10.278372,10.278372 z' fill='%23ff0000' stroke='%23000000' stroke-width='2.44111' id='path94' /%3E%3C/svg%3E%0A");}
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(255,255,255); /* Black background with opacity */
+    z-index: 9999; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: progress; /* Add a pointer on hover */
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotateY(0deg);}
+    to {-webkit-transform: rotateY(180deg);}
+}
+@-moz-keyframes rotation {
+    from {-moz-transform: rotateY(0deg);}
+    to {-moz-transform: rotateY(180deg);}
+}
+@-o-keyframes rotation {
+    from {-o-transform: rotateY(0deg);}
+    to {-o-transform: rotateY(180deg);}
+}
+@keyframes rotation {
+    from {transform: rotateY(0deg);}
+    to {transform: rotateY(180deg);}
+}

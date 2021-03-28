@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="45.599998"
+   height="64.996758"
+   viewBox="0 0 45.599998 64.996758"
+   enable-background="new 0 0 24 24"
+   xml:space="preserve"
+   id="svg8"
+   sodipodi:docname="view_marker.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+	<metadata
+   id="metadata14"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs12" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   id="namedview10"
+   showgrid="false"
+   inkscape:zoom="9.8333333"
+   inkscape:cx="22.349153"
+   inkscape:cy="33.986591"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg8" />
+<g
+   id="Bounding_Boxes"
+   transform="translate(10.349153,19.010169)">
+	<path
+   d="M 0,0 H 24 V 24 H 0 Z"
+   id="path2"
+   style="fill:none" />
+</g>
+<g
+   id="Sharp"
+   transform="matrix(3.2,0,0,3.2,-15.6,-6)"
+   style="fill:#dc1212;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+	<path
+   d="M 12,2 C 8.13,2 5,5.13 5,9 c 0,5.25 7,13 7,13 0,0 7,-7.75 7,-13 0,-3.87 -3.13,-7 -7,-7 z m 0,9.5 C 10.62,11.5 9.5,10.38 9.5,9 9.5,7.62 10.62,6.5 12,6.5 c 1.38,0 2.5,1.12 2.5,2.5 0,1.38 -1.12,2.5 -2.5,2.5 z"
+   id="path5"
+   style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+</g>
+</svg>
