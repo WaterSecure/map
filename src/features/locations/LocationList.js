@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import {
   filteredLocationsSelector,
   openModal,
+  fetchData,
   setActiveLocation,
 } from "./locationSlice";
 import { push } from "connected-react-router";
-import { fetchData } from "./fetchData";
 
 class LocationList extends React.Component {
   constructor(props) {

@@ -158,7 +158,14 @@ let Map = class Map extends React.Component {
   }
 
   render() {
-    return <div ref={this.mapRef} className="absolute top right left bottom" />;
+    return (
+      <div
+        ref={this.mapRef}
+        style={{
+          height: "100%",
+        }}
+      />
+    );
   }
 };
 

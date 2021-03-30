@@ -1,48 +1,39 @@
 {
   "metadata": {
-    "name": "Water Secure",
+    "title": "Water Secure",
     "brand_logo": "data/images/logo.png",
     "favicon": "data/images/favicon.png",
     "brand_alt": "Water Secure",
-    "initial_map_center": {
-      "type": "Point",
-      "coordinates": [
-        -113.508682,
-        53.534186
-      ]
-    },
     "description": "Test url",
-    "initial_map_pitch": 0,
-    "initial_map_zoom": 10,
-    "menu":
+    "menuItems":
         [
           {
             "title": "About",
-            "link": "example.com"
+            "link": "https://example.com"
           },
           {
             "title": "Services",
-            "link": "example.com"
+            "link": "https://example.com"
           },
           {
             "title": "Mapping",
-            "link": "example.com"
+            "link": "https://example.com"
           },
           {
             "title": "Reports",
-            "link": "example.com"
+            "link": "https://example.com"
           },
           {
             "title": "Education",
-            "link": "example.com"
+            "link": "https://example.com"
           },
           {
             "title": "Activism",
-            "link": "example.com"
+            "link": "https://example.com"
           },
           {
             "title": "Contact",
-            "link": "example.com"
+            "link": "https://example.com"
           }
         ]
   }

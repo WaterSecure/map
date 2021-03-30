@@ -41,41 +41,64 @@
 /*#map {*/
 /*height: 100%;*/
 /*}*/
-
-* {
-  box-sizing: border-box;
+.navbar {
+    background: #fefefe;
+    padding: 2rem;
+    grid-area: nav;
+    z-index: 500;
+    border-bottom: solid #cdcfd2;
+    border-width: 1px;
 }
 
-html,
+.sidebar {
+    grid-area: sidebar;
+    z-index: 400;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    overflow: scroll;
+}
+
+
+.map {
+    background: coral;
+    grid-area: map;
+    z-index: 300;
+}
+
 body {
-  width: 100%;
-  height: 100%;
-}
-body {
-  margin: 0;
-  padding: 0;
+    font-family: system-ui, sans-serif;
 }
 
-.container-fluid {
-  padding: 0;
-  margin: 0;
+.left-sidebar {
 }
 
-@media (min-width: 768px) {
-  .modal-xl {
-    width: 90%;
-    max-width: 1200px;
-  }
-}
+@media only screen and (max-width: 600px) {
+    #root {
+        display: grid;
+        height: 100vh;
+        width: 100vw;
+        grid:
+    [row1-start] "nav" 4rem [row1-end]
+    [row2-start] "map" 1fr [row2-end]
+    / 100%;
+    }
+    .sidebar {
+        display: none;
+        grid-area: sidebar;
+    }
 
-.wrapper {
-  display: flex;
-  align-items: flex-end;
-  height: 100%;
 }
-.box1 {
-  align-self: stretch;
-}
-.box2 {
-  align-self: flex-start;
+@media (min-width: 601px) {
+
+    #root {
+        display: grid;
+        height: 100vh;
+        width: 100vw;
+        grid:
+    [row1-start] "nav nav" 4rem [row1-end]
+    [row2-start] "sidebar map" 1fr [row2-end]
+    / 0.5fr 1fr;
+    }
+
 }

@@ -1,0 +1,10 @@
+.welcome > iframe {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.welcome > h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 0.75rem;
+}
