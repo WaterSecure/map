@@ -1,16 +1,3 @@
-export function distance_in_km(lnglat1, lnglat2) {
-  let [lon1, lat1] = lnglat1;
-  let [lat2, lon2] = lnglat2;
-
-  let p = 0.017453292519943295; // Math.PI / 180
-  let c = Math.cos;
-  let a =
-    0.5 -
-    c((lat2 - lat1) * p) / 2 +
-    (c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
-  return Math.round((12742 * Math.asin(Math.sqrt(a)) + 0.00001) * 100) / 100; // 2 * R; R = 6371 km
-}
-
 export function urlify_location(name) {
   return name.toLowerCase().replace(new RegExp(" ", "g"), "-");
 }

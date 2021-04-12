@@ -1,6 +1,15 @@
+/*For video embeds*/
 .welcome > iframe {
     padding-top: 2rem;
     padding-bottom: 2rem;
+    width: 100%;
+    height: max(15rem, 20vw);
+}
+
+.welcome {
+    z-index: 50;
+    background: white;
+
 }
 
 .welcome > h1 {

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { distance_in_km, urlify_location } from "../../utils";
+import { urlify_location } from "../../utils";
 import _ from "lodash";
 
 function getMeta(metaName) {
@@ -27,9 +27,6 @@ export const locationSlice = createSlice({
       contains_text: "",
       categories: [],
     },
-    initial_map_center: [-113.496548, 53.511435],
-    initial_map_zoom: [11.25],
-    initial_map_pitch: [50],
     current_user_location: null,
     modalIsOpen: false,
     brandLogo: null,
@@ -51,10 +48,6 @@ export const locationSlice = createSlice({
       state.locations = action.payload.locations;
       state.categories = action.payload.categories;
 
-      state.initial_map_center =
-        action.payload.metadata.initial_map_center.coordinates;
-      state.initial_map_zoom = [action.payload.metadata.initial_map_zoom];
-      state.initial_map_pitch = [action.payload.metadata.initial_map_pitch];
       state.brandLogo = action.payload.metadata.brand_logo;
       state.brandAltText = action.payload.metadata.brand_alt;
       state.loading = false;
@@ -133,10 +126,6 @@ export const allLocationsWithDistanceSelector = createSelector(
     let new_locations = [];
     for (let location of locations) {
       let new_location = Object.create(location);
-      new_location.distance = distance_in_km(
-        new_location.geo.geometry.coordinates,
-        user_location
-      );
       new_locations.push(new_location);
     }
     new_locations.sort((a, b) => a.distance - b.distance);
@@ -202,7 +191,7 @@ export const filteredLocationsAsGeoJSONSelector = createSelector(
   }
 );
 
-export function fetchData() {
+export function fetchLocationData() {
   return async (dispatch) => {
     dispatch(fetchDataBegin());
     try {

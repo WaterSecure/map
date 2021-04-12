@@ -22,6 +22,9 @@ export const metaSlice = createSlice({
     favicon: null,
     menuItems: [],
     description: null,
+    initial_map_center: [-113.496548, 53.511435],
+    initial_map_zoom: [11.25],
+    initial_map_pitch: [50],
   },
   reducers: {
     fetchDataBegin: (state) => {
@@ -38,6 +41,11 @@ export const metaSlice = createSlice({
       state.menuItems = action.payload.metadata.menuItems;
       state.description = action.payload.metadata.description;
       document.title = action.payload.metadata.title;
+
+      state.initial_map_center =
+        action.payload.map_metadata.initial_map_center.coordinates;
+      state.initial_map_zoom = [action.payload.map_metadata.initial_map_zoom];
+      state.initial_map_pitch = [action.payload.map_metadata.initial_map_pitch];
 
       getMeta("description").content = action.payload.metadata.description;
     },
@@ -63,9 +71,17 @@ export function fetchMetaData() {
       const project = await fetch(`./data/project.json`).then((res) =>
         res.json()
       );
+      let map_metadata = project.metadata["map"];
+      map_metadata.initial_map_center = {
+        initial_map_center: {
+          type: "Point",
+          coordinates: map_metadata.initial_map_center,
+        },
+      };
       dispatch(
         fetchDataSuccess({
-          metadata: project.metadata,
+          metadata: project.metadata.app,
+          map_metadata: map_metadata,
         })
       );
     } catch (error) {

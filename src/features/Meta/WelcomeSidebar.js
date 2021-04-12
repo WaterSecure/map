@@ -14,7 +14,12 @@ function WelcomeSidebar() {
     getWelcomePage();
   }, []);
 
-  return <div className="welcome" dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div
+      className="sidebar welcome"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }
 
 export default WelcomeSidebar;

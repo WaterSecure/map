@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import Map from "./features/map/Map";
-import LocationList from "./features/locations/LocationList";
 import "./App.css";
 import UserNav from "./features/Meta/NavBar";
 import LocationModal, {
@@ -12,6 +11,8 @@ import Spinner from "./features/locations/Spinner";
 import { connect } from "react-redux";
 import { fetchMetaData } from "./features/Meta/metaSlice";
 import WelcomeSidebar from "./features/Meta/WelcomeSidebar";
+import { fetchLocationData } from "./features/locations/locationSlice";
+import LocationSidebar from "./features/locations/LocationSidebar";
 
 function App(props) {
   // Set Title properly
@@ -23,6 +24,7 @@ function App(props) {
 
   useEffect(() => {
     fetchMetaData();
+    fetchLocationData();
   }, [fetchMetaData]);
 
   return (
@@ -30,9 +32,8 @@ function App(props) {
       <nav role="navigation" className="navbar">
         <UserNav />
       </nav>
-      <div className="sidebar">
-        <WelcomeSidebar />
-      </div>
+      <WelcomeSidebar />
+      <LocationSidebar />
       <div className="map">{false ? null : <Map />}</div>
       {/*<Spinner />*/}
       {/*<Container fluid style={{ margin: 0, padding: 0, height: "100%" }}>*/}
@@ -75,8 +76,18 @@ function App(props) {
       {/*    </Col>*/}
       {/*  </Row>*/}
       {/*</Container>*/}
-      {/*<LocationModal />*/}
-      {/*<Route path="/:locationName" render={() => <LocationOpener />} />*/}
+      <Route
+        path="/:locationName"
+        render={() => (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+      div.location { width: 100%; }
+    `,
+            }}
+          />
+        )}
+      />
     </>
   );
 }

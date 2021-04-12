@@ -1,40 +1,48 @@
 {
   "metadata": {
-    "title": "Water Secure",
-    "brand_logo": "data/images/logo.png",
-    "favicon": "data/images/favicon.png",
-    "brand_alt": "Water Secure",
-    "description": "Test url",
-    "menuItems":
-        [
-          {
-            "title": "About",
-            "link": "https://example.com"
-          },
-          {
-            "title": "Services",
-            "link": "https://example.com"
-          },
-          {
-            "title": "Mapping",
-            "link": "https://example.com"
-          },
-          {
-            "title": "Reports",
-            "link": "https://example.com"
-          },
-          {
-            "title": "Education",
-            "link": "https://example.com"
-          },
-          {
-            "title": "Activism",
-            "link": "https://example.com"
-          },
-          {
-            "title": "Contact",
-            "link": "https://example.com"
-          }
-        ]
+    "map":{
+
+        "initial_map_center": [-113.508682,53.534186],
+        "initial_map_pitch": 0,
+        "initial_map_zoom": 10
+
+    },
+    "app": {
+      "title": "Water Secure",
+      "brand_logo": "data/images/logo.png",
+      "favicon": "data/images/favicon.png",
+      "brand_alt": "Water Secure",
+      "description": "Test url",
+      "menuItems": [
+        {
+          "title": "About",
+          "link": "https://example.com"
+        },
+        {
+          "title": "Services",
+          "link": "https://example.com"
+        },
+        {
+          "title": "Mapping",
+          "link": "https://example.com"
+        },
+        {
+          "title": "Reports",
+          "link": "https://example.com"
+        },
+        {
+          "title": "Education",
+          "link": "https://example.com"
+        },
+        {
+          "title": "Activism",
+          "link": "https://example.com"
+        },
+        {
+          "title": "Contact",
+          "link": "https://example.com"
+        }
+      ]
+    }
   }
 }

@@ -6,6 +6,10 @@
       "description": "This is a description of Mapleville",
       "id": 7,
       "category_id": 1,
+      "coordinates": [
+        -113.565906,
+        53.52463
+      ],
       "media": [],
       "water_sources": [
         {

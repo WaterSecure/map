@@ -1,5 +1,4 @@
 import React from "react";
-// import PropTypes from 'prop-types'
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
 import {
@@ -8,13 +7,11 @@ import {
 } from "../locations/locationSlice";
 import * as utils from "../../utils";
 import memoizeOne from "memoize-one";
+import "./Map.css";
+import { withRouter } from "react-router-dom";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieHJlbmRhbiIsImEiOiJjamlubXdoeDgwZDF5M3BvNzl1Nm51ZTF2In0.cRp5pTHYfVlg5Qfhh9npmg";
-
-// const CENTER = [-113.496548, 53.511435];
-// const ZOOM = [11.25];
-// const PITCH = [50];
 
 function centerMap(map, center) {
   map.jumpTo({ center: center });
@@ -61,19 +58,23 @@ const memoizedLoadLocations = memoizeOne(
   (newArgs, lastArgs) => newArgs.locations === lastArgs.locations
 );
 
-const memoizedLoadCategories = memoizeOne(
-  loadCategories,
-  (newArgs, lastArgs) => newArgs.categories === lastArgs.categories
-);
+// const memoizedLoadCategories = memoizeOne(
+//   loadCategories,
+//   (newArgs, lastArgs) => newArgs.categories === lastArgs.categories
+// );
 
 let Map = class Map extends React.Component {
   mapRef = React.createRef();
   map;
 
+  nextPath(path) {
+    this.props.history.push(path);
+  }
+
   componentDidUpdate() {
-    try {
-      memoizedLoadCategories(this.map, this.props.categories);
-    } catch (e) {}
+    // try {
+    //   memoizedLoadCategories(this.map, this.props.categories);
+    // } catch (e) {}
     try {
       memoizedLoadLocations(this.map, this.props.data);
     } catch (e) {}
@@ -100,22 +101,44 @@ let Map = class Map extends React.Component {
     });
 
     this.map.on("load", () => {
-      memoizedLoadCategories(this.map, this.props.categories);
-      this.map.addSource("locations", {
-        type: "geojson",
-        data: this.props.data,
-      });
+      console.log(this.props.data);
+      var el = document.createElement("div");
+      el.className = "marker";
+      el.onclick = (e) => {
+        console.log(e);
+        this.nextPath("/1");
+      };
 
-      this.map.addLayer({
-        id: "locations",
-        type: "symbol",
-        source: "locations",
-        layout: {
-          "icon-image": ["concat", ["get", "category_id"], "-icon"],
-          "icon-allow-overlap": true,
-          "icon-anchor": "bottom",
-        },
-      });
+      new mapboxgl.Marker(el)
+        .setLngLat([-113.496548, 53.511435])
+        .addTo(this.map);
+
+      var el = document.createElement("div");
+      el.className = "marker";
+      el.onclick = (e) => {
+        console.log(e);
+        this.nextPath("/2");
+      };
+
+      new mapboxgl.Marker(el)
+        .setLngLat([-113.496548, 53.611435])
+        .addTo(this.map);
+
+      // this.map.addSource("locations", {
+      //   type: "geojson",
+      //   data: this.props.data,
+      // });
+
+      // this.map.addLayer({
+      //   id: "locations",
+      //   type: "symbol",
+      //   source: "locations",
+      //   layout: {
+      //     "icon-image": ["concat", ["get", "category_id"], "-icon"],
+      //     "icon-allow-overlap": true,
+      //     "icon-anchor": "bottom",
+      //   },
+      // });
     });
 
     let popup = new mapboxgl.Popup({
@@ -126,7 +149,6 @@ let Map = class Map extends React.Component {
     });
     this.map.on("mouseenter", "locations", (e) => {
       // TODO: action on hover
-      // Change the cursor style as a UI indicator.
       this.props.onHover(e);
 
       this.map.getCanvas().style.cursor = "pointer";
@@ -177,9 +199,9 @@ function getBackgroundCSS(elementID, pinColour) {
 function mapStateToProps(state) {
   let categories = allCategoriesSelector(state);
   return {
-    center: state.location.initial_map_center,
-    zoom: state.location.initial_map_zoom,
-    pitch: state.location.initial_map_pitch,
+    center: state.metadata.initial_map_center,
+    zoom: state.metadata.initial_map_zoom,
+    pitch: state.metadata.initial_map_pitch,
     categories: allCategoriesSelector(state),
     data: filteredLocationsAsGeoJSONSelector(state),
     // TODO: pull out of Map
@@ -219,4 +241,4 @@ function mapStateToProps(state) {
 
 Map = connect(mapStateToProps)(Map);
 
-export default Map;
+export default withRouter(Map);
