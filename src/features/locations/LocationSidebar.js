@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function LocationSidebar() {
   return (
-    <div className="sidebar location">
+    <div className="sidebar location-sidebar">
       <Link to="/">Hello</Link>
     </div>
   );
