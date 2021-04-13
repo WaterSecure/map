@@ -1,0 +1,78 @@
+{
+  "locations": [
+    {
+      "title": "Mapleville",
+      "population": 3104,
+      "description": "This is a description of Mapleville",
+      "id": 7,
+      "coordinates": [
+        -113.565906,
+        53.52463
+      ],
+      "water_sources": [
+        {
+          "name": "North Saskatchewan River",
+          "coordinates": [
+            -113.565906,
+            53.62463
+          ]
+        }
+      ],
+      "tabs": {
+        "Water Security": {
+          "current_analysis": "[Paragraph on an analysis of the community’s current water security situation.]",
+          "future_analysis": "[Paragraph on an analysis of the community’s current water security situation.]",
+          "factors": {
+            "Sources and Availability": {
+              "Groundwater Wells": 2,
+              "Surface Freshwater": 3,
+              "Purified Water Storage Tanks": 4
+            },
+            "Consumption and Usage": {
+              "Drinking and Cooking": 2,
+              "Sanitation and Bathing": 3,
+              "Irrigated Farming": 4
+            },
+            "Infrastructure and Distribution": {
+              "Water Flow": 2,
+              "Access to Hot Water": 3,
+              "Home Piping Systems": 4
+            }
+          }
+        },
+        "Population Health": {
+          "current_analysis": "[Paragraph on an analysis of the community’s current population health situation.]",
+          "future_analysis": "[Paragraph on an analysis of the community’s future population health prospects and improvement opportunities.]",
+          "factors": {
+            "Human Health": {
+              "Total Coliform": 2,
+              "Escherichia Coli": 3,
+              "Algal Toxicity": 4
+            },
+            "Animal Health": {
+              "Fish Health": 2,
+              "Benthic Invertebrate Health": 3,
+              "Invasive Species": 4
+            }
+          }
+        },
+        "Environmental Risks": {
+          "current_analysis":"[Paragraph on an analysis of the community’s current environmental situation.]",
+          "future_analysis": "[Paragraph on an analysis of the community’s future environmental prospects and improvement opportunities.]",
+          "factors": {
+            "Waterbody Health": {
+              "Freshwater Acidification": 2,
+              "Eutrophication": 3,
+              "Alteration of Water Flows": 4
+            },
+            "Human Pollution": {
+              "Marine Debris": 2,
+              "Agricultural Runoff": 3,
+              "Industrial Dumping": 4
+            }
+          }
+        }
+      }
+    }
+  ]
+}
