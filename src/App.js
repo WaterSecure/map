@@ -3,20 +3,21 @@ import React, { useState, useEffect } from "react";
 import Map from "./features/map/Map";
 import "./App.css";
 import UserNav from "./features/Meta/NavBar";
-import LocationModal, {
-  LocationOpener,
-} from "./features/locations/LocationModal";
 import { Route } from "react-router-dom";
 import Spinner from "./features/locations/Spinner";
 import { connect } from "react-redux";
 import { fetchMetaData } from "./features/Meta/metaSlice";
 import WelcomeSidebar from "./features/Meta/WelcomeSidebar";
-import { fetchLocationData } from "./features/locations/locationSlice";
+import {
+  activeLocationSelector,
+  fetchLocationData,
+  LocationOpener,
+} from "./features/locations/locationSlice";
 import LocationSidebar from "./features/locations/LocationSidebar";
 
 function App(props) {
   // Set Title properly
-  let { fetchMetaData } = props;
+  let { fetchMetaData, fetchLocationData } = props;
 
   useEffect(() => {
     if (props.currentPath === "") document.title = props.siteName;
@@ -24,8 +25,11 @@ function App(props) {
 
   useEffect(() => {
     fetchMetaData();
-    fetchLocationData();
   }, [fetchMetaData]);
+
+  useEffect(() => {
+    fetchLocationData();
+  }, [fetchLocationData]);
 
   return (
     <>
@@ -81,23 +85,25 @@ function App(props) {
         render={() => (
           <style
             dangerouslySetInnerHTML={{
-              __html: `
-      div.location { width: 100%; }
-    `,
+              __html: `div.location-sidebar { width: 100%; }`,
             }}
           />
         )}
       />
+      <LocationOpener />
     </>
   );
 }
 
 function mapStateToProps(state) {
   return {
+    location: activeLocationSelector(state),
     spinning: state.location.loading,
     siteName: state.location.brandAltText,
     currentPath: state.router.location.pathname.slice(1),
   };
 }
 
-export default connect(mapStateToProps, { fetchMetaData })(App);
+export default connect(mapStateToProps, { fetchMetaData, fetchLocationData })(
+  App
+);

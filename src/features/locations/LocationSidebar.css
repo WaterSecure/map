@@ -1,7 +1,146 @@
 .location-sidebar {
-    z-index: 50;
-    background: red;
-    transition: width 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    z-index: 51;
+    background: white;
+    transition: width 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940);
     width: 0;
     padding: 0;
+    display: grid;
+    height: 100%;
+    overflow-y: hidden;
+    grid:
+    [row1-start] "content" auto [row1-end]
+    [row2-start] "documents" 4rem [row2-end]
+    / 100%;
+
+}
+
+.location-sidebar.active {
+    border-right: dashed red;
+    width: 100%;
+}
+
+
+.content {
+    grid-area: content;
+    width: 100%;
+    padding: 2rem;
+    padding-top: 0;
+    overflow-y: auto
+}
+.content h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 0.75rem;
+    padding-top: 1rem;
+}
+.header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    /*padding-top: 10px;*/
+    padding-bottom: 10px;
+    background-color: white;
+    border-bottom: 1px solid lightgrey;
+}
+.backarrow {
+    padding: 0;
+    padding-right: 1rem;
+    height: 1.5rem
+}
+.metric {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.metric > .indicator {
+    width: 2.8rem;
+    height: 2.8rem;
+    float: left;
+    border: 2px solid rgba(0,0,0, 0.25);;
+    border-radius: 5px;
+    margin-right:0.5rem;
+    margin-left:0.3rem;
+}
+
+.metric > .indicator.level-0 {
+    background-color: #999999;
+}
+.metric-text {
+    padding-left: 2rem;
+}
+.metric-title {
+    vertical-align: top;
+    font-size: larger;
+    color: #5f656d;
+    font-weight: bold;
+}
+
+.metric-value {
+    font-size: smaller;
+    color: #b4b3ba;
+    font-weight: bold;
+}
+
+.metric > .indicator.level-1 {
+    background-color: #0b7a00;
+}
+
+.metric > .indicator.level-2 {
+    background-color: #49db00;
+}
+
+.metric > .indicator.level-3 {
+    background-color: #ffda43;
+}
+
+.metric > .indicator.level-4 {
+    background-color: #ff9100;
+}
+
+.metric > .indicator.level-5 {
+    background-color: #d13333;
+}
+
+.documents  {
+    grid-area: documents;
+    background-color: #d13333;
+}
+
+.metric-section > h2 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+
+}
+
+button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out,
+    transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
 }

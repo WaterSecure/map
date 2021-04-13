@@ -2,58 +2,75 @@
   "locations": [
     {
       "title": "Mapleville",
-      "population": "3104",
+      "population": 3104,
       "description": "This is a description of Mapleville",
       "id": 7,
-      "category_id": 1,
       "coordinates": [
         -113.565906,
         53.52463
       ],
-      "media": [],
       "water_sources": [
         {
           "name": "North Saskatchewan River",
           "coordinates": [
             -113.565906,
-            53.52463
+            53.62463
           ]
         }
       ],
-      "geo": {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -113.542297,
-            53.50625
-          ]
-        }
-      }
-    },
-    {
-      "title": "Talus Balls",
-      "description": "The Talus Balls are infamous for being expensive ($600 000), ugly, and being placed in an odd location. Although most Edmontonians hate this work of public art, it\u2019s worth checking out at least once. Some kids climb on top of them, which may get you in trouble, IDK. It\u2019s also possible to crawl to the inside of the balls (unless the hole has been filled in recently), also not advisable. It\u2019s worth it to check out the balls if you are exploring the Whitemud Half-Circles or underneath the Quesnell bridge too. Park underneath the Quesnell on Fort Edmonton Park Road in the little side area.",
-      "id": 8,
-      "category_id": 2,
-      "media": [
-        {
-          "type": "image",
-          "url": "https://s3-us-west-2.amazonaws.com/yeg-secrets/b6ecfe56-ced1-4510-b0e8-9e13cb6c2348.jpg"
+      "tabs": {
+        "Water Security": {
+          "current_analysis": "[Paragraph on an analysis of the community’s current water security situation.]",
+          "future_analysis": "[Paragraph on an analysis of the community’s current water security situation.]",
+          "factors": {
+            "Sources and Availability": {
+              "Groundwater Wells": 2,
+              "Surface Freshwater": 3,
+              "Purified Water Storage Tanks": 4
+            },
+            "Consumption and Usage": {
+              "Drinking and Cooking": 2,
+              "Sanitation and Bathing": 3,
+              "Irrigated Farming": 4
+            },
+            "Infrastructure and Distribution": {
+              "Water Flow": 2,
+              "Access to Hot Water": 3,
+              "Home Piping Systems": 4
+            }
+          }
         },
-        {
-          "type": "image",
-          "url": "https://s3-us-west-2.amazonaws.com/yeg-secrets/eb7babfe-5995-4711-9ae8-b47fc393941e.jpg"
-        }
-      ],
-      "geo": {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -113.565906,
-            53.50463
-          ]
+        "Population Health": {
+          "current_analysis": "[Paragraph on an analysis of the community’s current population health situation.]",
+          "future_analysis": "[Paragraph on an analysis of the community’s future population health prospects and improvement opportunities.]",
+          "factors": {
+            "Human Health": {
+              "Total Coliform": 2,
+              "Escherichia Coli": 3,
+              "Algal Toxicity": 4
+            },
+            "Animal Health": {
+              "Fish Health": 2,
+              "Benthic Invertebrate Health": 3,
+              "Invasive Species": 4
+            }
+          }
+        },
+        "Environmental Risks": {
+          "current_analysis":"[Paragraph on an analysis of the community’s current environmental situation.]",
+          "future_analysis": "[Paragraph on an analysis of the community’s future environmental prospects and improvement opportunities.]",
+          "factors": {
+            "Waterbody Health": {
+              "Freshwater Acidification": 2,
+              "Eutrophication": 3,
+              "Alteration of Water Flows": 4
+            },
+            "Human Pollution": {
+              "Marine Debris": 2,
+              "Agricultural Runoff": 3,
+              "Industrial Dumping": 4
+            }
+          }
         }
       }
     }

@@ -3,13 +3,16 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
 import {
   allCategoriesSelector,
-  filteredLocationsAsGeoJSONSelector,
+  allLocationsSelector,
+  setActiveLocation,
 } from "../locations/locationSlice";
 import * as utils from "../../utils";
 import memoizeOne from "memoize-one";
 import "./Map.css";
 import { withRouter } from "react-router-dom";
-
+import CommunitySVG from "./community.svg";
+import { community_icon, water_source_icon } from "./icons";
+import { urlify_location } from "../../utils";
 mapboxgl.accessToken =
   "pk.eyJ1IjoieHJlbmRhbiIsImEiOiJjamlubXdoeDgwZDF5M3BvNzl1Nm51ZTF2In0.cRp5pTHYfVlg5Qfhh9npmg";
 
@@ -53,31 +56,85 @@ const memoizedPitchMap = memoizeOne(
   (newArgs, lastArgs) => newArgs.pitch === lastArgs.pitch
 );
 
-const memoizedLoadLocations = memoizeOne(
-  loadLocations,
-  (newArgs, lastArgs) => newArgs.locations === lastArgs.locations
-);
-
-// const memoizedLoadCategories = memoizeOne(
-//   loadCategories,
-//   (newArgs, lastArgs) => newArgs.categories === lastArgs.categories
-// );
-
 let Map = class Map extends React.Component {
   mapRef = React.createRef();
   map;
+  state = {
+    markers: [],
+  };
 
   nextPath(path) {
     this.props.history.push(path);
   }
+  memoizedLoadLocations = memoizeOne(
+    this.loadLocations,
+    (newArgs, lastArgs) => newArgs.locations === lastArgs.locations
+  );
+  loadLocations(locations) {
+    this.state.markers.forEach((marker) => {
+      marker.remove();
+    });
+    let markers = [];
+    locations.forEach((location) => {
+      console.log(location);
+      let el = document.createElement("div");
+      el.className = "community";
+      el.id = `community-${location.id}`;
+      el.innerHTML = community_icon;
+      el.onclick = (e) => {
+        console.log(e);
+        this.props.setActiveLocation(location);
+        this.nextPath(`/${urlify_location(location.title)}`);
+      };
+      let popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        anchor: "bottom",
+        offset: 40,
+      });
+      el.onmouseenter = (e) => {
+        popup
+          .setLngLat(location.coordinates)
+          .setHTML(location.title)
+          .addTo(this.map);
+      };
+
+      el.onmouseleave = (e) => {
+        popup.remove();
+      };
+
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat(location.coordinates)
+        .addTo(this.map);
+      markers.push(marker);
+
+      location.water_sources.forEach((water_source) => {
+        let el = document.createElement("div");
+        el.className = `water-source water-source-${location.id}`;
+        el.innerHTML = water_source_icon;
+        el.onmouseenter = (e) => {
+          popup
+            .setLngLat(water_source.coordinates)
+            .setHTML(water_source.name)
+            .addTo(this.map);
+        };
+
+        el.onmouseleave = (e) => {
+          popup.remove();
+        };
+        const marker = new mapboxgl.Marker(el)
+          .setLngLat(water_source.coordinates)
+          .addTo(this.map);
+        markers.push(marker);
+      });
+      this.setState({
+        markers: markers,
+      });
+    });
+  }
 
   componentDidUpdate() {
-    // try {
-    //   memoizedLoadCategories(this.map, this.props.categories);
-    // } catch (e) {}
-    try {
-      memoizedLoadLocations(this.map, this.props.data);
-    } catch (e) {}
+    this.memoizedLoadLocations(this.props.locations);
     try {
       memoizedCenterMap(this.map, this.props.center);
     } catch (e) {
@@ -95,52 +152,15 @@ let Map = class Map extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
       style: "mapbox://styles/mapbox/streets-v9",
+      customAttribution: "Icons by fjstudio & Freepik on Flaticon",
       center: this.props.center,
       zoom: this.props.zoom,
       pitch: this.props.pitch,
     });
 
     this.map.on("load", () => {
-      console.log(this.props.data);
-      var el = document.createElement("div");
-      el.className = "marker";
-      el.onclick = (e) => {
-        console.log(e);
-        this.nextPath("/1");
-      };
-
-      new mapboxgl.Marker(el)
-        .setLngLat([-113.496548, 53.511435])
-        .addTo(this.map);
-
-      var el = document.createElement("div");
-      el.className = "marker";
-      el.onclick = (e) => {
-        console.log(e);
-        this.nextPath("/2");
-      };
-
-      new mapboxgl.Marker(el)
-        .setLngLat([-113.496548, 53.611435])
-        .addTo(this.map);
-
-      // this.map.addSource("locations", {
-      //   type: "geojson",
-      //   data: this.props.data,
-      // });
-
-      // this.map.addLayer({
-      //   id: "locations",
-      //   type: "symbol",
-      //   source: "locations",
-      //   layout: {
-      //     "icon-image": ["concat", ["get", "category_id"], "-icon"],
-      //     "icon-allow-overlap": true,
-      //     "icon-anchor": "bottom",
-      //   },
-      // });
+      this.loadLocations(this.props.locations);
     });
-
     let popup = new mapboxgl.Popup({
       closeButton: false,
       closeOnClick: false,
@@ -203,7 +223,7 @@ function mapStateToProps(state) {
     zoom: state.metadata.initial_map_zoom,
     pitch: state.metadata.initial_map_pitch,
     categories: allCategoriesSelector(state),
-    data: filteredLocationsAsGeoJSONSelector(state),
+    locations: allLocationsSelector(state),
     // TODO: pull out of Map
     onHover: (e) => {
       let locationHtmlId = `location-${e.features[0].properties.id}`;
@@ -239,6 +259,6 @@ function mapStateToProps(state) {
   };
 }
 
-Map = connect(mapStateToProps)(Map);
+Map = connect(mapStateToProps, { setActiveLocation })(Map);
 
 export default withRouter(Map);

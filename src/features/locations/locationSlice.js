@@ -2,6 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { urlify_location } from "../../utils";
 import _ from "lodash";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
 
 function getMeta(metaName) {
   const metas = document.getElementsByTagName("meta");
@@ -74,14 +78,12 @@ export const locationSlice = createSlice({
       state.filters.categories = action.payload;
     },
     setActiveLocation: (state, action) => {
+      if (!!action.payload) {
+        document.title = action.payload.title;
+      } else {
+        document.title = "WaterSecure";
+      }
       state.activeLocation = action.payload;
-    },
-    closeModal: (state) => {
-      state.modalIsOpen = false;
-      state.activeLocation = null;
-    },
-    openModal: (state) => {
-      state.modalIsOpen = true;
     },
   },
 });
@@ -95,7 +97,6 @@ export const {
   setCategoryFilter,
   setActiveLocation,
   closeModal,
-  openModal,
 } = locationSlice.actions;
 
 function text_in(location, text) {
@@ -117,77 +118,17 @@ export const allCategoriesSelector = (state) => state.location.categories;
 export const locationModalIsOpenSelector = (state) =>
   state.location.modalIsOpen;
 export const activeLocationSelector = (state) => state.location.activeLocation;
-export const userLocationSelector = (state) =>
-  state.location.current_user_location || state.location.initial_map_center;
-export const allLocationsWithDistanceSelector = createSelector(
-  allLocationsSelector,
-  userLocationSelector,
-  (locations, user_location) => {
-    let new_locations = [];
-    for (let location of locations) {
-      let new_location = Object.create(location);
-      new_locations.push(new_location);
-    }
-    new_locations.sort((a, b) => a.distance - b.distance);
-    return new_locations;
-  }
-);
-
-export const filterFunctionSelector = createSelector(
-  allFilterSelector,
-  (filters) => {
-    return (location) => {
-      if (filters.max_distance && location.distance > filters.max_distance) {
-        return false;
-      }
-      if (filters.contains_text && !text_in(location, filters.contains_text)) {
-        return false;
-      }
-      if (
-        filters.categories.length !== 0 &&
-        !filters.categories.includes(location.category_id)
-      ) {
-        return false;
-      }
-      return true;
-    };
-  }
-);
-
-export const filteredLocationsSelector = createSelector(
-  allLocationsWithDistanceSelector,
-  filterFunctionSelector,
-  (locations, filter) => locations.filter(filter)
-);
 
 export const urlToLocationMapSelector = createSelector(
-  allLocationsWithDistanceSelector,
+  allLocationsSelector,
   (locations) => {
     let url_map = {};
     for (let location of locations) {
+      console.log(location);
       // let new_location = Object.create(location);
       url_map[urlify_location(location.title)] = location;
     }
     return url_map;
-  }
-);
-
-export const filteredLocationsAsGeoJSONSelector = createSelector(
-  filteredLocationsSelector,
-  (locations) => {
-    return {
-      type: "FeatureCollection",
-      // features: locations.map(location => location.geo)
-      features: locations.map((location) => {
-        let location_geo = _.cloneDeep(location.geo);
-        location_geo.properties = {
-          id: location.id,
-          title: location.title,
-          category_id: location.category_id,
-        };
-        return location_geo;
-      }),
-    };
   }
 );
 
@@ -200,6 +141,7 @@ export function fetchLocationData() {
         fetch(`./data/project.json`).then((res) => res.json()),
         fetch(`./data/categories.json`).then((res) => res.json()),
       ]);
+      console.log(locations);
       dispatch(
         fetchDataSuccess({
           locations: locations.locations,
@@ -212,5 +154,38 @@ export function fetchLocationData() {
     }
   };
 }
+
+let LocationOpener = (props) => {
+  useEffect(() => {
+    // Update the document title using the browser API
+    if (props.isRoot) {
+      props.setActiveLocation(null);
+      // Update the document title using the browser API
+    } else if (!props.location) {
+      props.setActiveLocation(props.urlLocation);
+      // Update the document title using the browser API
+    }
+  });
+  return <></>;
+};
+
+LocationOpener = connect(
+  (state) => {
+    const path = state.router.location.pathname.slice(1);
+    let urlLocation = urlToLocationMapSelector(state)[path];
+    return {
+      location: activeLocationSelector(state),
+      urlLocation: urlLocation,
+      isRoot: path === "",
+      siteName: state.location.brandAltText,
+      site_name_in_location: state.location.features.site_name_in_location,
+    };
+  },
+  {
+    setActiveLocation,
+  }
+)(LocationOpener);
+
+export { LocationOpener };
 
 export default locationSlice.reducer;
