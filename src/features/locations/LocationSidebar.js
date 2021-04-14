@@ -60,14 +60,22 @@ function Tab(props) {
   );
 }
 
-function Documents() {
-  return (
-    <div className="documents">
-      <div className="border-right">Doc 1</div>
-      <div className="border-right">Doc 2</div>
-      <div>Doc 3</div>
-    </div>
-  );
+function Documents(props) {
+  let documents = [];
+  for (const [key, value] of Object.entries(props.documents)) {
+    documents.push(
+      <a
+        key={key}
+        className="border-right"
+        rel="noopener noreferrer"
+        target="_blank"
+        href={value}
+      >
+        {key}
+      </a>
+    );
+  }
+  return <div className="documents">{documents}</div>;
 }
 
 function Metric(props) {
@@ -127,14 +135,26 @@ function LocationSidebar(props) {
         </div>
         <br />
         <p>{props.location.description}</p>
-        <button onClick={() => setTab("Water Security")}>Water Security</button>
-        <button onClick={() => setTab("Population Health")}>
-          Population Health
-        </button>
-        <button onClick={() => setTab("Environmental Risks")}>
-          Environmental Risks
-        </button>
-
+        <div className="tabSwitcher">
+          <button
+            className={tab === "Water Security" ? "active" : ""}
+            onClick={() => setTab("Water Security")}
+          >
+            <p>Water Security</p>
+          </button>
+          <button
+            className={tab === "Population Health" ? "active" : ""}
+            onClick={() => setTab("Population Health")}
+          >
+            <p>Population Health</p>
+          </button>
+          <button
+            className={tab === "Environmental Risks" ? "active" : ""}
+            onClick={() => setTab("Environmental Risks")}
+          >
+            <p>Environmental Risks</p>
+          </button>
+        </div>
         {tab === "Water Security" ? <Tab {...tabs["Water Security"]} /> : null}
 
         {tab === "Population Health" ? (
@@ -145,7 +165,7 @@ function LocationSidebar(props) {
           <Tab {...tabs["Environmental Risks"]} />
         ) : null}
       </div>
-      <Documents />
+      <Documents documents={props.location.documents} />
     </div>
   );
 }

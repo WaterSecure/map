@@ -18,6 +18,11 @@
           ]
         }
       ],
+      "documents": {
+        "Document 1": "data/documents/output.pdf",
+        "Document 2": "data/documents/output.pdf",
+        "Document 3": "data/documents/output.pdf"
+      },
       "tabs": {
         "Water Security": {
           "current_analysis": "[Paragraph on an analysis of the community’s current water security situation.]",

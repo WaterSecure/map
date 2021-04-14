@@ -75,7 +75,7 @@ let Map = class Map extends React.Component {
         closeButton: false,
         closeOnClick: false,
         anchor: "bottom",
-        offset: 40,
+        offset: 60,
       });
       el.onmouseenter = (e) => {
         popup
@@ -88,14 +88,16 @@ let Map = class Map extends React.Component {
         popup.remove();
       };
 
-      const marker = new mapboxgl.Marker(el)
+      const marker = new mapboxgl.Marker({ element: el, anchor: "bottom" })
         .setLngLat(location.coordinates)
         .addTo(this.map);
       markers.push(marker);
 
       location.water_sources.forEach((water_source) => {
         let el = document.createElement("div");
-        el.className = `water-source water-source-${location.id}`;
+        el.className = `water-source water-source-${urlify_location(
+          location.title
+        )}`;
         el.innerHTML = water_source_icon;
         el.onmouseenter = (e) => {
           popup

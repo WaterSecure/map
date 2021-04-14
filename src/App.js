@@ -14,6 +14,7 @@ import {
   LocationOpener,
 } from "./features/locations/locationSlice";
 import LocationSidebar from "./features/locations/LocationSidebar";
+import { urlify_location } from "./utils";
 
 function App(props) {
   // Set Title properly
@@ -85,7 +86,16 @@ function App(props) {
         render={() => (
           <style
             dangerouslySetInnerHTML={{
-              __html: `div.location-sidebar { width: 100%; }`,
+              __html: `
+              div.location-sidebar { 
+                  width: 100%; 
+              }
+              .water-source.water-source-${urlify_location(
+                props.location.title
+              )} {
+                visibility: visible;
+                }
+              `,
             }}
           />
         )}
