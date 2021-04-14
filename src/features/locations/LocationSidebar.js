@@ -61,7 +61,13 @@ function Tab(props) {
 }
 
 function Documents() {
-  return <div className="documents">Hello</div>;
+  return (
+    <div className="documents">
+      <div className="border-right">Doc 1</div>
+      <div className="border-right">Doc 2</div>
+      <div>Doc 3</div>
+    </div>
+  );
 }
 
 function Metric(props) {
