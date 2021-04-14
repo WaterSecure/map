@@ -15,6 +15,7 @@ import {
 } from "./features/locations/locationSlice";
 import LocationSidebar from "./features/locations/LocationSidebar";
 import { urlify_location } from "./utils";
+import Spinner from "./features/locations/Spinner";
 
 function App(props) {
   // Set Title properly
@@ -40,47 +41,7 @@ function App(props) {
       <WelcomeSidebar />
       <LocationSidebar />
       <div className="map">{false ? null : <Map />}</div>
-      {/*<Spinner />*/}
-      {/*<Container fluid style={{ margin: 0, padding: 0, height: "100%" }}>*/}
-      {/*  <Row*/}
-      {/*    no-gutters="true"*/}
-      {/*    style={{ margin: 0, padding: 0, height: "100%" }}*/}
-      {/*  >*/}
-      {/*    <Col*/}
-      {/*      className="locations-sidebar"*/}
-      {/*      lg="3"*/}
-      {/*      style={{*/}
-      {/*        height: "100%",*/}
-      {/*        position: "absolute",*/}
-      {/*        margin: 0,*/}
-      {/*        padding: 0,*/}
-      {/*        left: 0,*/}
-      {/*        top: 0,*/}
-      {/*      }}*/}
-      {/*    >*/}
-      {/*      <UserNav />*/}
-      {/*      <LocationList />*/}
-      {/*    </Col>*/}
-      {/*    <Col*/}
-      {/*      className="locations-sidebar"*/}
-      {/*      lg="3"*/}
-      {/*      style={{ height: "100%" }}*/}
-      {/*    />*/}
-      {/*    <Col*/}
-      {/*      id="map"*/}
-      {/*      lg="9"*/}
-      {/*      style={{*/}
-      {/*        margin: 0,*/}
-      {/*        padding: 0,*/}
-      {/*        height: "100vh",*/}
-      {/*        position: "relative",*/}
-      {/*      }}*/}
-      {/*    >*/}
-      {/*      <MobileNav className={"mobile-navbar"} />*/}
-      {/*      {props.loading ? null : <Map />}*/}
-      {/*    </Col>*/}
-      {/*  </Row>*/}
-      {/*</Container>*/}
+      <Spinner />
       <Route
         path="/:locationName"
         render={() => (
@@ -90,9 +51,10 @@ function App(props) {
               div.location-sidebar { 
                   width: 100%; 
               }
-              .water-source.water-source-${urlify_location(
-                props.location.title
-              )} {
+              
+              .water-source.water-source-${
+                props.location && urlify_location(props.location.title)
+              } {
                 visibility: visible;
                 }
               `,

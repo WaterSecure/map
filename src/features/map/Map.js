@@ -10,7 +10,7 @@ import * as utils from "../../utils";
 import memoizeOne from "memoize-one";
 import "./Map.css";
 import { withRouter } from "react-router-dom";
-import { community_icon, water_source_icon } from "./icons";
+import { community_icon, water_source_icon } from "../../icons";
 import { urlify_location } from "../../utils";
 mapboxgl.accessToken =
   "pk.eyJ1IjoieHJlbmRhbiIsImEiOiJjamlubXdoeDgwZDF5M3BvNzl1Nm51ZTF2In0.cRp5pTHYfVlg5Qfhh9npmg";
@@ -109,7 +109,7 @@ let Map = class Map extends React.Component {
         el.onmouseleave = (e) => {
           popup.remove();
         };
-        const marker = new mapboxgl.Marker(el)
+        const marker = new mapboxgl.Marker({ element: el, anchor: "bottom" })
           .setLngLat(water_source.coordinates)
           .addTo(this.map);
         markers.push(marker);
