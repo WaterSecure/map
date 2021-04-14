@@ -139,7 +139,8 @@ let Map = class Map extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
       style: "mapbox://styles/mapbox/streets-v9",
-      customAttribution: "Icons by fjstudio & Freepik on Flaticon",
+      customAttribution:
+        '<a href="https://brendansamek.com">Developed by Brendan Samek</a> | Icons by fjstudio & Freepik on Flaticon',
       center: this.props.center,
       zoom: this.props.zoom,
       pitch: this.props.pitch,
