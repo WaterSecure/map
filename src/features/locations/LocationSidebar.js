@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import BackArrow from "./left-arrow.svg";
 import { connect } from "react-redux";
 import { activeLocationSelector } from "./locationSlice";
+import { community_icon } from "../../icons";
+import * as PropTypes from "prop-types";
 
 const RISK_MAPPING = {
   0: "UNAVAILABLE INFORMATION",
@@ -108,9 +110,21 @@ function MetricSection(props) {
   );
 }
 
+function Icon(props) {
+  return (
+    <div
+      className={"icon"}
+      dangerouslySetInnerHTML={{
+        __html: props.svg,
+      }}
+    />
+  );
+}
+
+Icon.propTypes = { svg: PropTypes.string };
+
 function LocationSidebar(props) {
   const [tab, setTab] = useState("Water Security");
-  console.log(tab);
   if (!props.location) {
     return <div className="sidebar location-sidebar" />;
   }
@@ -140,18 +154,21 @@ function LocationSidebar(props) {
             className={tab === "Water Security" ? "active" : ""}
             onClick={() => setTab("Water Security")}
           >
+            <Icon svg={community_icon} />
             <p>Water Security</p>
           </button>
           <button
             className={tab === "Population Health" ? "active" : ""}
             onClick={() => setTab("Population Health")}
           >
+            <Icon svg={community_icon} />
             <p>Population Health</p>
           </button>
           <button
             className={tab === "Environmental Risks" ? "active" : ""}
             onClick={() => setTab("Environmental Risks")}
           >
+            <Icon svg={community_icon} />
             <p>Environmental Risks</p>
           </button>
         </div>
