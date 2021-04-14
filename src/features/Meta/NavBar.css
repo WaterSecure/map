@@ -17,7 +17,16 @@
 .nav-items > .nav-item {
     transform: translateY(-50%);
 }
-
+@media only screen and (max-width: 460px) {
+.vertical-center {
+    padding:0
+}
+    .navbar {
+        padding-left: 0;
+        padding-right: 0;
+        overflow-y: hidden;
+    }
+}
 
 a {
     text-decoration: none;
@@ -41,8 +50,10 @@ li {
     text-decoration: none;
     transition-duration: 0.5s;
 }
-
-li a {
+li button {
+    padding-top: 8px;
+}
+li a, li button {
     color: #717171;
     font-weight: bold
 }
@@ -53,7 +64,9 @@ li:focus-within {
     cursor: pointer;
 }
 
-li:focus-within a {
+li:focus-within a,
+li:focus-within button
+{
     outline: none;
 }
 

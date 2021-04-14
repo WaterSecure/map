@@ -10,7 +10,6 @@ import * as utils from "../../utils";
 import memoizeOne from "memoize-one";
 import "./Map.css";
 import { withRouter } from "react-router-dom";
-import CommunitySVG from "./community.svg";
 import { community_icon, water_source_icon } from "./icons";
 import { urlify_location } from "../../utils";
 mapboxgl.accessToken =
@@ -24,20 +23,6 @@ function zoomMap(map, zoom) {
 }
 function pitchMap(map, pitch) {
   map.jumpTo({ pitch: pitch });
-}
-
-function loadLocations(map, locations) {
-  map.getSource("locations").setData(locations);
-}
-
-function loadCategories(map, categories) {
-  for (let category of categories) {
-    utils.generatePinIcon(category.color).then((image) => {
-      try {
-        map.addImage(`${category.id}-icon`, image);
-      } catch (e) {}
-    });
-  }
 }
 
 //memoize map centering to ensure it only changes on center props update

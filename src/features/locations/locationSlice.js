@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { urlify_location } from "../../utils";
-import _ from "lodash";
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
 
 function getMeta(metaName) {
   const metas = document.getElementsByTagName("meta");
@@ -92,27 +89,17 @@ export const {
   fetchDataBegin,
   fetchDataSuccess,
   fetchDataFailure,
-  setMaxDistanceFilter,
   setTextFilter,
   setCategoryFilter,
   setActiveLocation,
   closeModal,
 } = locationSlice.actions;
 
-function text_in(location, text) {
-  return (
-    location.title.toLowerCase().includes(text.toLowerCase()) ||
-    location.description.toLowerCase().includes(text.toLowerCase())
-  );
-}
-
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const logoSelector = (state) => state.location.brandLogo;
 export const logoAltTextSelector = (state) => state.location.brandAltText;
 export const filterOpenSelector = (state) => state.location.filterIsOpen;
-export const allFilterSelector = (state) => state.location.filters;
 export const allLocationsSelector = (state) => state.location.locations;
 export const allCategoriesSelector = (state) => state.location.categories;
 export const locationModalIsOpenSelector = (state) =>
@@ -150,6 +137,7 @@ export function fetchLocationData() {
         })
       );
     } catch (error) {
+      console.error(error);
       dispatch(fetchDataFailure(error));
     }
   };

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import Map from "./features/map/Map";
 import "./App.css";
 import UserNav from "./features/Meta/NavBar";
 import { Route } from "react-router-dom";
-import Spinner from "./features/locations/Spinner";
+// import Spinner from "./features/locations/Spinner";
 import { connect } from "react-redux";
 import { fetchMetaData } from "./features/Meta/metaSlice";
 import WelcomeSidebar from "./features/Meta/WelcomeSidebar";

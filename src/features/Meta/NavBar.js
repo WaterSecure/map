@@ -68,9 +68,13 @@ function NavBar(props) {
       <ul className="nav-items">
         {collapsed ? (
           <li className="vertical-center">
-            <a href="#" aria-haspopup="true">
-              Menu
-            </a>
+            <button aria-haspopup="true">
+              <svg viewBox="0 0 90 75" width="40" height="40">
+                <rect width="90" height="12" rx="8"></rect>
+                <rect y="25" width="90" height="12" rx="8"></rect>
+                <rect y="50" width="90" height="12" rx="8"></rect>
+              </svg>
+            </button>
             <ul className="dropdown" aria-label="sublabel">
               {navItems}
             </ul>

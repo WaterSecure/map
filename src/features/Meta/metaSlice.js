@@ -85,6 +85,7 @@ export function fetchMetaData() {
         })
       );
     } catch (error) {
+      console.error(error);
       dispatch(fetchDataFailure(error));
     }
   };
