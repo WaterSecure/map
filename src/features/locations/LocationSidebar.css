@@ -11,7 +11,6 @@
     [row1-start] "content" auto [row1-end]
     [row2-start] "documents" 4rem [row2-end]
     / 100%;
-
 }
 
 .location-sidebar.active {
@@ -27,6 +26,13 @@
     padding-top: 0;
     overflow-y: auto
 }
+
+.content p{
+    font-size: larger;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 .content h1 {
     font-size: 1.5rem;
     font-weight: bold;
@@ -103,7 +109,7 @@
 .documents  {
     grid-area: documents;
     display: flex;
-    border-top: 1px solid grey;
+    background-color: #f4f4f4;
 }
 .documents > a  {
     flex-grow: 1;
@@ -111,8 +117,9 @@
     text-align: center;
     vertical-align: center;
 }
-.documents > .border-right  {
-    border-right: 1px solid grey;
+.documents > .document  {
+    margin: auto;
+    font-weight: bold;
 }
 
 .metric-section > h2 {

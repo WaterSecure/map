@@ -68,7 +68,7 @@ function Documents(props) {
     documents.push(
       <a
         key={key}
-        className="border-right"
+        className="document"
         rel="noopener noreferrer"
         target="_blank"
         href={value}
@@ -147,7 +147,6 @@ function LocationSidebar(props) {
             })}
           </p>
         </div>
-        <br />
         <p>{props.location.description}</p>
         <div className="tabSwitcher">
           <button

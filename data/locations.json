@@ -19,9 +19,10 @@
         }
       ],
       "documents": {
-        "Document 1": "data/documents/output.pdf",
-        "Document 2": "data/documents/output.pdf",
-        "Document 3": "data/documents/output.pdf"
+        "Analytical Report": "data/documents/output.pdf",
+        "Raw Data": "data/documents/output.pdf",
+        "Sources Used": "data/documents/output.pdf",
+        "Change Log": "data/documents/output.pdf"
       },
       "tabs": {
         "Water Security": {
